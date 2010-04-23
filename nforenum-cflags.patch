@@ -5,7 +5,7 @@
  CFLAGS = -g -mno-cygwin -O1 -idirafter$(BOOST_INCLUDE) -Wall -Wno-uninitialized $(CFLAGAPP)
  else
 -CFLAGS = -g -O1 -idirafter$(BOOST_INCLUDE) -Wall -Wno-uninitialized $(CFLAGAPP)
-+CFLAGS = -g  -idirafter$(BOOST_INCLUDE) -Wall -Wno-uninitialized $(CFLAGAPP)
++CFLAGS = -idirafter$(BOOST_INCLUDE) -Wall -Wno-uninitialized $(CFLAGAPP)
  endif
  
  CXXFLAGS = $(CFLAGS)
