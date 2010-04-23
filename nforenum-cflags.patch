@@ -1,0 +1,11 @@
+--- nforenum-r2309/Makefile~	2009-12-24 01:05:24.000000000 +0100
++++ nforenum-r2309/Makefile	2010-04-23 12:32:35.289742111 +0200
+@@ -31,7 +31,7 @@
+ ifeq ($(ISCYGWIN),1)
+ CFLAGS = -g -mno-cygwin -O1 -idirafter$(BOOST_INCLUDE) -Wall -Wno-uninitialized $(CFLAGAPP)
+ else
+-CFLAGS = -g -O1 -idirafter$(BOOST_INCLUDE) -Wall -Wno-uninitialized $(CFLAGAPP)
++CFLAGS = -g  -idirafter$(BOOST_INCLUDE) -Wall -Wno-uninitialized $(CFLAGAPP)
+ endif
+ 
+ CXXFLAGS = $(CFLAGS)
