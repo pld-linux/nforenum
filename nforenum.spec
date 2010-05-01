@@ -9,6 +9,9 @@ Source0:	http://binaries.openttd.org/extra/nforenum/%{version}/%{name}-%{version
 # Source0-md5:	cab21665a9a14339c590a8f9981787c3
 Patch0:		%{name}-cflags.patch
 URL:		http://www.openttd.org/en/download-nforenum
+BuildRequires:	boost-devel
+BuildRequires:	libstdc++-devel
+BuildRequires:	perl-base
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -26,6 +29,7 @@ oraz OpenTTD.
 
 %build
 %{__make} \
+	SVNVERSION="echo %{version} | tr -d r" \
 	CC="%{__cc}" \
 	CXX="%{__cxx}" \
 	CFLAGAPP="%{rpmcxxflags}" \
