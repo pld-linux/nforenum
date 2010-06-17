@@ -6,7 +6,7 @@ Version:	3.4.6
 Release:	0.%{rev}.1
 License:	GPL v2+
 Group:		Applications
-Source0:	http://binaries.openttd.org/extra/nforenum/%{version}/%{name}-r%{rev}-source.tar.bz2
+Source0:	http://binaries.openttd.org/extra/nforenum/r%{rev}/%{name}-r%{rev}-source.tar.bz2
 # Source0-md5:	cab21665a9a14339c590a8f9981787c3
 Patch0:		%{name}-cflags.patch
 URL:		http://www.openttd.org/en/download-nforenum
