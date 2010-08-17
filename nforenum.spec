@@ -1,18 +1,18 @@
-%define		rev	2309
 Summary:	Tool to create add-ons for TTDPatch and OpenTTD
 Summary(pl.UTF-8):	Narzędzie do tworzenia dodatków dla TTDPatch oraz OpenTTD
 Name:		nforenum
-Version:	3.4.6
-Release:	0.%{rev}.1
+Version:	4.0.0
+Release:	1
 License:	GPL v2+
 Group:		Applications
-Source0:	http://binaries.openttd.org/extra/nforenum/r%{rev}/%{name}-r%{rev}-source.tar.bz2
-# Source0-md5:	cab21665a9a14339c590a8f9981787c3
-Patch0:		%{name}-cflags.patch
+Source0:	http://binaries.openttd.org/extra/nforenum/%{version}/%{name}-%{version}-source.tar.gz
+# Source0-md5:	9dd7ec02f14256ca65e648b5de415eea
+Patch0:		%{name}-flags.patch
 URL:		http://www.openttd.org/en/download-nforenum
 BuildRequires:	boost-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	perl-base
+BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -25,34 +25,32 @@ wygląd plików NFO. Jest używany do tworzenia dodatków dla TTDPatch
 oraz OpenTTD.
 
 %prep
-%setup -q -n %{name}-r%{rev}
+%setup -q -n %{name}-%{version}-source
 %patch0 -p1
-
-VER=$(awk '/VER /{print $3}' version.def)
-if [ "$VER" != "%{version}" ]; then
-	: Current version is $VER, not %{version}
-	exit 1
-fi
 
 %build
 %{__make} \
 	SVNVERSION="echo %{rev}" \
 	CC="%{__cc}" \
 	CXX="%{__cxx}" \
-	CFLAGAPP="%{rpmcxxflags}" \
+	CXXFLAGS="%{rpmcxxflags}" \
 	LDOPT="%{rpmldflags}" \
 	V="1"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1}
 
-install renum $RPM_BUILD_ROOT%{_bindir}
+install nforenum $RPM_BUILD_ROOT%{_bindir}
+install docs/nforenum.1 $RPM_BUILD_ROOT%{_mandir}/man1
+
+gzip $RPM_BUILD_ROOT%{_mandir}/man1/nforenum.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG.txt TODO.txt
-%attr(755,root,root) %{_bindir}/renum
+%doc changelog.txt docs/*.txt
+%attr(755,root,root) %{_bindir}/nforenum
+%{_mandir}/man1/nforenum.1*
